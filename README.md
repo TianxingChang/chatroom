@@ -1,1 +1,2 @@
-# chatroom
+# Server & Client chatroom
+### GUI: qt
