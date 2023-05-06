@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include "chatroom.h"
+#include <signal.h>
 
 #define MAX 1024  // max buffer size
 #define PORT 6789 // port number
@@ -47,6 +48,14 @@ void recv_server_msg_handler()
 	}
 }
 
+void signal_callback_handler(int signum)
+{
+	char msg[] = "EXIT";
+	send(sockfd, msg, strlen(msg), 0);
+	printf("Sent EXIT to server.\n");
+	exit(signum);
+}
+
 int main()
 {
 	int n;
@@ -65,6 +74,8 @@ int main()
 	}
 	else
 		printf("Socket successfully created...\n");
+
+	signal(SIGINT, signal_callback_handler);
 
 	bzero(&server_addr, sizeof(server_addr));
 	server_addr.sin_family = AF_INET;
