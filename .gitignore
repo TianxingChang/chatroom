@@ -1,4 +1,5 @@
-/Skeleton/*.txt
-/Skeleton/*.o
-/Skeleton/*.app
+Skeleton/*.txt
+Skeleton/*.o
+Skeleton/*.app
 .gitignore
+.vscode/
