@@ -97,7 +97,7 @@ int get_sockfd(char *name)
 	sock = -1;
 	for (i = 0; i < users_count; i++)
 	{
-		if (strncmp(listOfUsers[i]->username, name, strlen(listOfUsers[i]->username)) == 0)
+		if (strcmp(listOfUsers[i]->username, name) == 0)
 		{
 			sock = listOfUsers[i]->sockfd;
 			break;
