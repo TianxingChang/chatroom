@@ -2,5 +2,5 @@
 /Skeleton/*.o
 /Skeleton/*.app
 .gitignore
-/.vscode
-/.Example
+.vscode/
+Example/
