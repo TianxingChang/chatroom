@@ -1,4 +1,4 @@
-*.txt
-*.o
-!server
-!client
+/Skeleton/*.txt
+/Skeleton/*.o
+/Skeleton/*.app
+.gitignore
