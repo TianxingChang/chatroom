@@ -402,7 +402,7 @@ int main()
 							/**********************************/
 							for (int ii = 0; ii < users_count; ii++)
 							{
-								if (listOfUsers[ii]->sockfd == newfd)
+								if (listOfUsers[ii]->sockfd == pfds[i].fd)
 								{
 									listOfUsers[ii]->state = 0;
 									listOfUsers[ii]->sockfd = 0;
@@ -433,7 +433,6 @@ int main()
 								printf("name: %s", listOfUsers[ii]->username);
 								if (strcmp(listOfUsers[ii]->username, get_username(pfds[i].fd)) != 0)
 								{
-									printf("at least\n");
 									if (first)
 									{
 										strcpy(ToClient, listOfUsers[ii]->username);
