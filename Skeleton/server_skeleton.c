@@ -306,8 +306,12 @@ int main()
 								/*****************************/
 								bzero(buffer, sizeof(buffer));
 								strcpy(buffer, "A new account has been created.\n");
+								// strcpy(buffer, "Set your password.\n");
 								if (send(pfds[i].fd, buffer, sizeof(buffer), 0) == -1)
 									perror("send new account message failed");
+								else
+								{
+								}
 							}
 							else
 							{
@@ -591,10 +595,25 @@ int main()
 							}
 						}
 					}
-				} // end handle data from client
-			}	  // end got new incoming connection
-		}		  // end looping through file descriptors
-	}			  // end for(;;)
+				}								  // end handle data from client
+			}									  // end got new incoming connection
+			else if (pfds[i].revents & POLLRDHUP) // the socket is disconnected
+			{
+				for (int ii = 0; ii < users_count; ii++)
+				{
+					if (listOfUsers[ii]->sockfd == pfds[i].fd)
+					{
+						listOfUsers[ii]->state = 0;
+						listOfUsers[ii]->sockfd = 0;
+						break;
+					}
+				}
+				// close the socket and remove the socket from pfds[]
+				close(pfds[i].fd);
+				del_from_pfds(pfds, i, &fd_count);
+			}
+		} // end looping through file descriptors
+	}	  // end for(;;)
 
 	return 0;
 }
